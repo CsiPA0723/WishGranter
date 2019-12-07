@@ -16,10 +16,16 @@ module.exports.run = async (bot, message, args) => {
         message.channel.send(`A kivánság nem teljesíthető, kérlek kivánd így: \`${this.help.usage}\``);
         return;
     }
+    if(target.id == message.author.id) {
+        message.channel.send(`A kivánság nem teljesíthető, magadnak nem utalhatsz tá RUB-ot!`);
+        return;
+    }
     var summary = parseInt(args[0]);
     var currencyData = database.GetData('currency', message.author.id);
     var targetCurrencyData = database.GetData('currency', target.id);
-    if(currencyData.rub < summary) summary = currencyData.rub;
+    if(currencyData.rub <= 0 || summary < 0) summary = 0;
+    else if(currencyData.rub < summary) summary = currencyData.rub;
+
     currencyData.rub -= summary;
     targetCurrencyData.rub += summary;
     database.SetData('currency', currencyData);

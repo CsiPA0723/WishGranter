@@ -88,7 +88,7 @@ bot.on('message', async message => {
         else if(shutdowns.includes(command)) await shutdown(message, "Shutting down");
         else if(updates.includes(command)) await shutdown(message, "Updating");
         else if(restarts.includes(command)) await shutdown(message, "Restarting");
-        else if(switchmodes.includes(command)) await shutdown(message, "Switching to mode " + (CONFIG.mode == "development" ? "production." : "development."));
+        else if(switchmodes.includes(command)) await shutdown(message, "Switching to mode: " + (config.mode == "development" ? "production." : "development."));
     } else if(message.content.startsWith(prefix)) {
         const { command, args } = makeArgs(message, prefix);
 

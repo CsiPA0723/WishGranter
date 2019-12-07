@@ -57,7 +57,7 @@ module.exports.run = (bot, message, args) => {
                 if(pageSystem.currentPage === 1) return;
                 pageSystem.currentPage--;
                 embed.setDescription(pageSystem.pages[pageSystem.currentPage - 1]);
-                embed.setFooter(`Page ${pageSystem.currentPage} of ${pageSystem.pages.length}`); 
+                embed.setFooter(`${pageSystem.currentPage}. oldal a ${pageSystem.pages.length}-ből/ból.`);
                 msg.edit({embed: embed}).catch(console.error);
             });
 
@@ -65,7 +65,7 @@ module.exports.run = (bot, message, args) => {
                 if(pageSystem.currentPage === pageSystem.pages.length) return;
                 pageSystem.currentPage++;
                 embed.setDescription(pageSystem.pages[pageSystem.currentPage - 1]);
-                embed.setFooter(`Page ${pageSystem.currentPage} of ${pageSystem.pages.length}`); 
+                embed.setFooter(`${pageSystem.currentPage}. oldal a ${pageSystem.pages.length}-ből/ból.`);
                 msg.edit({embed: embed}).catch(console.error);
             });
         }).catch(console.error);
