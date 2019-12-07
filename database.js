@@ -89,7 +89,9 @@ module.exports = {
         var tableArr = DatabaseTableSchema[`${tableName}`];
         var obj = { id: id };
         for(let i = 1; i < tableArr.length; i++) {
-            if(tableArr[i].type.includes("BOOLEAN") || tableArr[i].type.includes("INTEGER")) {
+            if(tableArr[i].name == "rub") {
+                obj["rub"] = 1000;
+            } else if(tableArr[i].type.includes("BOOLEAN") || tableArr[i].type.includes("INTEGER")) {
                 obj[tableArr[i].name] = 0;
             } else if(tableArr[i].type.includes("TEXT")) {
                 obj[tableArr[i].name] = "None";
