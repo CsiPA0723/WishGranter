@@ -1,0 +1,29 @@
+{
+  "name": "wishgranter",
+  "version": "1.0.0",
+  "description": "A discord bot for a specified discord guild. S.T.A.L.K.E.R.",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://CsiPA0723@bitbucket.org/CsiPA0723/wishgranter.git"
+  },
+  "keywords": [
+    "discord",
+    "wish",
+    "granter",
+    "bot",
+    "stalker"
+  ],
+  "author": "CsiPA",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/CsiPA0723/wishgranter#readme",
+  "dependencies": {
+    "better-sqlite3": "^5.4.3",
+    "colors": "^1.4.0",
+    "dateformat": "^3.0.3",
+    "discord.js": "^11.5.1"
+  }
+}

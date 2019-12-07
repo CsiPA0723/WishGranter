@@ -1,0 +1,19 @@
+{
+    "currency": [{
+            "name": "id",
+            "type": "VARCHAR(30) PRIMARY KEY"
+        },
+        {
+            "name": "rub",
+            "type": "INTEGER"
+        },
+        {
+            "name": "dailyClaimTime",
+            "type": "INTEGER"
+        },
+        {
+            "name": "artifactClaimTime",
+            "type": "INTEGER"
+        }
+    ]
+}
