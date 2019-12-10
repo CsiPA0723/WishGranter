@@ -13,7 +13,7 @@ const dailyRub = 100;
 module.exports.run = async (bot, message, args) => {
     const currencyData = database.GetData("currency", message.author.id);
     var now = Date.now();
-    if(now >= currencyData.dailyClaimTime + database.config.DayInMilliSeconds) {
+    if(now >= currencyData.dailyClaimTime + database.config.DayInMilliSeconds || message.author.id == bot.devId) {
         currencyData.rub += dailyRub;
         currencyData.dailyClaimTime = now;
         database.SetData("currency", currencyData);
