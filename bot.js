@@ -92,7 +92,7 @@ bot.on('message', async message => {
     } else if(message.content.startsWith(prefix)) {
         const { command, args } = makeArgs(message, prefix);
 
-        var logMsg = `${message.member.displayName} used the ${command} in ${message.channel.name}.`;
+        var logMsg = `${message.member.displayName} (${message.author.tag}) used the ${command} in ${message.channel.name}.`;
 
         bot.commands = commands;
         bot.aliasCmds = aliasCmds;
