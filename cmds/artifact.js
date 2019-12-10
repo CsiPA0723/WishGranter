@@ -31,23 +31,23 @@ function Artifact() {
         rubMin: 200
     }];
     var badOutcomes = [{
-            msg: "Majdnem ott hagytad a fogad, te radioaktív kutyatáp!A mocsári doktor mentett meg! Orvosi költség: **-# RUB**",
+            msg: "Majdnem ott hagytad a fogad, te radioaktív kutyatáp! A mocsári doktor mentett meg! Orvosi költség: **# RUB**",
             rubMax: 150,
             rubMin: 100  
         },{
-            msg: "Értékes képződményt találtál, de a bárban el is ittad az árát… Sőt többet is **-# RUB**",
+            msg: "Értékes képződményt találtál, de a bárban el is ittad az árát… Sőt többet is **# RUB**",
             rubMax: 200,
             rubMin: 100  
         },{
-            msg: "Ördög-gyám képződményt találtál… Inkább hagyd ott **0 RUB**",
+            msg: "Ördög-gyám képződményt találtál… Inkább hagyd ott **# RUB**",
             rubMax: 0,
             rubMin: 0  
         },{
-            msg: "A kutatásod során rátok támadtak, nem találtál semmit. Sőt, egy bicskád is odaveszett! **0 RUB**",
+            msg: "A kutatásod során rátok támadtak, nem találtál semmit. Sőt, egy bicskád is odaveszett! **# RUB**",
             rubMax: 0,
             rubMin: 0  
         },{
-            msg: "Azta! Ez igen értékes darab! 3000 RUB az értéke! Ezért az egész bár a te kontodra szórakozott! Sajnos bőven elitták az árát. **-# RUB**",
+            msg: "Azta! Ez igen értékes darab! 3000 RUB az értéke! Ezért az egész bár a te kontodra szórakozott! Sajnos bőven elitták az árát. **# RUB**",
             rubMax: 350,
             rubMin: 200  
         }
