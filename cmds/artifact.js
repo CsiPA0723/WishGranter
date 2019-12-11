@@ -69,7 +69,6 @@ function Artifact() {
         msg: ""
     }
 
-    const winChance = 20;
     var rnd = Math.random();
     var acc = 0;
     for (var i=0, o; o = outcomes[i]; i++) {
@@ -80,15 +79,6 @@ function Artifact() {
             else retruned.rub = -rub;
             retruned.msg = o.msg.replace("#", `${retruned.rub}`);
         };
-    }
-
-    if(rnd < winChance / 100) {
-        var { msg, rubMax, rubMin } = goodOutcomes[Math.floor(Math.random() * goodOutcomes.length)];
-        
-    } else {
-        var { msg, rubMax, rubMin } = badOutcomes[Math.floor(Math.random() * badOutcomes.length)];
-        retruned.rub = -Math.floor(Math.random() * (rubMax - rubMin) + rubMin);
-        retruned.msg = msg.replace("#", `${retruned.rub}`);
     }
 
     return retruned;
