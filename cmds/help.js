@@ -77,5 +77,5 @@ module.exports.help = {
     alias: [],
     name: "Help",
     desc: "Lista a parancsokról.",
-    usage: ">help <oldal / parancs>",
+    usage: "%help <oldal / parancs>",
 }

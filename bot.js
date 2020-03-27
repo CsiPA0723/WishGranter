@@ -39,8 +39,8 @@ bot.logDate = (timestamp) => {
 bot.on('ready', () => {
     database.Prepare('currency');
 
-    mainGuild = bot.guilds.get('572873520732831754');
-    devLogChannel = bot.guilds.get('427567526935920655').channels.get('647420812722307082');
+    mainGuild = bot.guilds.get('662018979082010664');
+    devLogChannel = bot.guilds.get('427567526935920655').channels.get('693080450406678528');
 
     bot.mainGuild = mainGuild;
     bot.devLogChannel = devLogChannel;

@@ -10,9 +10,9 @@ const Functions = require('./functions.js');
 /** 
  * @typedef {Object} databaseObject
  * @property {string} id
- * @property {number} rub
- * @property {number} dailyClaimTime
- * @property {number} artifactClaimTime
+ * @property {number} st
+ * @property {number} workClaimTime
+ * @property {number} taskClaimTime
 */
 
 /** @typedef {('currency')} tableName */
@@ -113,5 +113,7 @@ function GetLastAvaiableId() {
 
 module.exports.config = {
     DayInMilliSeconds: 86400000,
-    HalfDayInMilliSeconds: 43200000
+    HalfDayInMilliSeconds: 43200000,
+    Hours6InMilliSeconds: 21600000,
+    Hours3InMilliSeconds: 10800000
 }

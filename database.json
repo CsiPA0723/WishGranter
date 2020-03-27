@@ -4,15 +4,15 @@
             "type": "VARCHAR(30) PRIMARY KEY"
         },
         {
-            "name": "rub",
+            "name": "st",
             "type": "INTEGER"
         },
         {
-            "name": "dailyClaimTime",
+            "name": "workClaimTime",
             "type": "INTEGER"
         },
         {
-            "name": "artifactClaimTime",
+            "name": "taskClaimTime",
             "type": "INTEGER"
         }
     ]
