@@ -35,7 +35,7 @@ function Task() {
         chance: 60
     }
 ];
-    var returned = {
+    var task = {
         st: 0,
         msg: ""
     }
@@ -47,14 +47,14 @@ function Task() {
         acc += outcomes[i].chance / 100;
         if (rnd < acc) {
             var st = outcomes.st;
-            if(outcomes[i].good) returned.st = st;
-            else retruned.st = -st;
-            retruned.msg = outcomes[i].msg.replace("#", `${returned.st}`);
+            if(outcomes[i].good) task.st = st;
+            else task.st = -st;
+            task.msg = outcomes[i].msg.replace("#", `${task.st}`);
         };
         i++;
     }
 
-    return returned;
+    return task;
 }
 
 module.exports.help = {
