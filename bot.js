@@ -13,7 +13,7 @@ const database = require('./database');
 
 /** @type {string} */
 const prefix = settings.prefix;
-const devPrefix = "w>";
+const devPrefix = "bm>";
 const devId = "333324517730680842";
 bot.devPrefix = devPrefix;
 bot.devId = devId;
@@ -80,7 +80,7 @@ bot.on('message', async message => {
                 });
             }
         } else if(reloads.includes(command)) {
-            devLogChannel.send("\`Reloading commands\`");
+            if(devLogChannel) devLogChannel.send("\`Reloading commands\`");
             console.log("Reloading commands");
             loadCmds();
             message.channel.send("Commands successfully reloaded!");
@@ -145,7 +145,7 @@ function makeArgs(message, prefix) {
  */
 
 async function shutdown(message, text) {
-    await devLogChannel.send(`\`${text}\``);
+    if(devLogChannel) await devLogChannel.send(`\`${text}\``);
     await message.channel.send(`\`${text}\``);
     console.log(text);
     await bot.destroy().catch(console.error);
