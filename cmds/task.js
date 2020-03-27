@@ -46,7 +46,7 @@ function Task() {
     while(rnd > acc && i < outcomes.length) {
         acc += outcomes[i].chance / 100;
         if (rnd < acc) {
-            var st = outcomes.st;
+            var st = outcomes[i].st;
             if(outcomes[i].good) task.st = st;
             else task.st = -st;
             task.msg = outcomes[i].msg.replace("#", `${task.st}`);
