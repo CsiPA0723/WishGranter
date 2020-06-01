@@ -10,9 +10,9 @@ const Functions = require('./functions.js');
 /** 
  * @typedef {Object} databaseObject
  * @property {string} id
- * @property {number} st
- * @property {number} workClaimTime
- * @property {number} taskClaimTime
+ * @property {number} gold
+ * @property {number} raidClaimTime
+ * @property {number} exploreClaimTime
 */
 
 /** @typedef {('currency')} tableName */

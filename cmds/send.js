@@ -17,30 +17,30 @@ module.exports.run = async (bot, message, args) => {
         return;
     }
     if(target.id == message.author.id) {
-        message.channel.send(`Error, you cannot send ST to yourself`);
+        message.channel.send(`Error, you cannot send Gold to yourself`);
         return;
     }
     var summary = parseInt(args[0]);
     var currencyData = database.GetData('currency', message.author.id);
     var targetCurrencyData = database.GetData('currency', target.id);
     if(!message.author.id == "545287753995255818") {
-        if(currencyData.st <= 0 || summary < 0) summary = 0;
-        else if(currencyData.st < summary) summary = currencyData.st;
+        if(currencyData.gold <= 0 || summary < 0) summary = 0;
+        else if(currencyData.gold < summary) summary = currencyData.gold;
     } else {
-        currencyData.st = Math.floor(Math.random() * (120000 - 22000) + 22000);
-        currencyData.st += summary;
+        currencyData.gold = Math.floor(Math.random() * (120000 - 22000) + 22000);
+        currencyData.gold += summary;
     }
-    currencyData.st -= summary;
-    targetCurrencyData.st += summary;
+    currencyData.gold -= summary;
+    targetCurrencyData.gold += summary;
     database.SetData('currency', currencyData);
     database.SetData('currency', targetCurrencyData);
-    message.channel.send(`${summary} SWASTER SENT TO ${target.displayName}`);
+    message.channel.send(`${summary} Gold sent to ${target.displayName}`);
 }
 
 module.exports.help = {
     cmd: "send",
     alias: ["utal"],
     name: "Send",
-    desc: "Utalj át másoknak ST-t!",
+    desc: "Utalj át másoknak aranyat!",
     usage: "%send [összeg] [név]",
 }

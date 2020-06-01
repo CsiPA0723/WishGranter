@@ -4,15 +4,15 @@
             "type": "VARCHAR(30) PRIMARY KEY"
         },
         {
-            "name": "st",
+            "name": "gold",
             "type": "INTEGER"
         },
         {
-            "name": "workClaimTime",
+            "name": "raidClaimTime",
             "type": "INTEGER"
         },
         {
-            "name": "taskClaimTime",
+            "name": "exploreClaimTime",
             "type": "INTEGER"
         }
     ]

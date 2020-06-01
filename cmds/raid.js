@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 const database = require('../database');
 
-const dailySt = { min: 100, max: 250 };
+const dailyGold = { min: 100, max: 250 };
 
 /**
  * @param {Discord.Client} bot The bot itself.
@@ -14,24 +14,24 @@ module.exports.run = async (bot, message, args) => {
     const currencyData = database.GetData("currency", message.author.id);
     var now = Date.now();
     if(now >= currencyData.workClaimTime + database.config.Hours3InMilliSeconds || message.author.id == bot.devId) {
-        var st = getDailySt();
-        currencyData.st += st;
+        var gold = getDailyGold();
+        currencyData.gold += gold;
         currencyData.workClaimTime = now;
         database.SetData("currency", currencyData);
-        message.channel.send(`PAYMENT: ${st} ST`); 
+        message.channel.send(`*placeholder*: ${gold} Gold`); 
     } else {
         message.channel.send("There is no work for you right now!");
     }
 }
 
-function getDailySt() {
-    return Math.floor(Math.random() * (dailySt.max - dailySt.min) + dailySt.min);
+function getDailyGold() {
+    return Math.floor(Math.random() * (dailyGold.max - dailyGold.min) + dailyGold.min);
 }
 
 module.exports.help = {
-    cmd: "work",
+    cmd: "raid",
     alias: ["munka"],
-    name: "Working",
-    desc: "Dolgozz! (3 óránkét érhető el)",
-    usage: "%work",
+    name: "Raid",
+    desc: "*desc*",
+    usage: "%raid",
 }
