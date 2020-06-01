@@ -25,12 +25,12 @@ module.exports.run = async (bot, message, args) => {
 function Explore() {
     var outcomes = [{
         good: false,
-        msg: "*placeholder*: **# Gold**",
+        msg: "Sikertelen kalandozás: **# Gold**",
         gold: 150,
         chance: 40
     },{
         good: true,
-        msg: "*placeholder*: **# Gold**",
+        msg: "Felfedezésért járó összeg: **# Gold**",
         gold: 300,
         chance: 60
     }

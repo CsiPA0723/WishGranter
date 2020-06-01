@@ -34,7 +34,7 @@ module.exports.run = async (bot, message, args) => {
     targetCurrencyData.gold += summary;
     database.SetData('currency', currencyData);
     database.SetData('currency', targetCurrencyData);
-    message.channel.send(`${summary} Gold sent to ${target.displayName}`);
+    message.channel.send(`${summary} Gold átadva neki ${target.displayName}`);
 }
 
 module.exports.help = {

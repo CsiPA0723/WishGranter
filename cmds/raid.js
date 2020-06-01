@@ -18,9 +18,9 @@ module.exports.run = async (bot, message, args) => {
         currencyData.gold += gold;
         currencyData.workClaimTime = now;
         database.SetData("currency", currencyData);
-        message.channel.send(`*placeholder*: ${gold} Gold`); 
+        message.channel.send(`Zsákmány: ${gold} Gold`); 
     } else {
-        message.channel.send("There is no work for you right now!");
+        message.channel.send("*placeholder for cooldown msg*");
     }
 }
 
