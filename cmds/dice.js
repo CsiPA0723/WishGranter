@@ -72,7 +72,7 @@ module.exports.run = async (bot, message, args) => {
                 else console.log("Collector timeout");
             });
         }).catch(console.error);
-    } else message.channel.send("*placeholder for cooldown msg*");
+    } else message.channel.send("Próbálkozz később");
 }
 
 function roleDice() { return Math.floor(Math.random() * 5 + 1); }

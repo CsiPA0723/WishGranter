@@ -17,9 +17,7 @@ module.exports.run = async (bot, message, args) => {
         currencyData.exploreClaimTime = now;
         database.SetData("currency", currencyData);
         message.channel.send(explore.msg); 
-    } else {
-        message.channel.send("*placeholder*");
-    }
+    } else message.channel.send("Még pihenj, nehéz a felfedezés.");
 }
 
 function Explore() {

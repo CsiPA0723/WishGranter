@@ -20,7 +20,7 @@ module.exports.run = async (bot, message, args) => {
         database.SetData("currency", currencyData);
         message.channel.send(`Zsákmány: ${gold} Gold`); 
     } else {
-        message.channel.send("*placeholder for cooldown msg*");
+        message.channel.send("Még nem állsz készen a támadásra.");
     }
 }
 
