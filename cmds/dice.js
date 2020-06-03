@@ -40,7 +40,7 @@ module.exports.run = async (bot, message, args) => {
 
             collector.on('collect', m => {
                 var win = false;
-                var result = m.content.match(/(\d)/g);
+                var result = m.content.match(/(\d+)/g);
                 var guess = result[0];
                 if(!isNaN(guess) && guess >= 2 && guess <= 12) {
                     embed.setDescription(
