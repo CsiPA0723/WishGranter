@@ -14,6 +14,10 @@
         {
             "name": "exploreClaimTime",
             "type": "INTEGER"
+        },
+        {
+            "name": "diceClaimTime",
+            "type": "INTEGER"
         }
     ]
 }

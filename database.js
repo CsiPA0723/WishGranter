@@ -13,6 +13,7 @@ const Functions = require('./functions.js');
  * @property {number} gold
  * @property {number} raidClaimTime
  * @property {number} exploreClaimTime
+ * @property {number} diceClaimTime
 */
 
 /** @typedef {('currency')} tableName */

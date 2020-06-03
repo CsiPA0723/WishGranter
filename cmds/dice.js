@@ -21,7 +21,7 @@ module.exports.run = async (bot, message, args) => {
     if(pBet < Min_BET) { message.channel.send(`A minimum tétel 500 gold.`); return; }
     if(pBet > currencyData.gold) { message.channel.send(`Nincs ennyi gold-od.`); return; }
 
-    if(now >= currencyData.workClaimTime + database.config.Hours3InMilliSeconds || message.author.id == bot.devId) {
+    if(now >= currencyData.diceClaimTime + database.config.Hours3InMilliSeconds || message.author.id == bot.devId) {
         var diceNum1 = roleDice();
         var diceNum2 = roleDice();
         var sum = diceNum1 + diceNum2;
