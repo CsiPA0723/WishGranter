@@ -16,10 +16,11 @@ module.exports.run = async (bot, message, args) => {
     var now = Date.now();
 
     var pBet = parseInt(args[0]);
-
-    if(isNaN(pBet)) { message.channel.send(`Kérem rakjon egy tételt. \`SEGÍTSÉG\` => \`${this.help.usage}\``); return; }
+    if(isNaN(pBet) || Number.MAX_VALUE >= pBet) { message.channel.send(`Kérem rakjon egy tételt. \`SEGÍTSÉG => ${this.help.usage}\``); return; }
+    if(pBet < 0) pBet = 0;
+    if(pBet > currencyData.gold) pBet = currencyData.gold;
     if(pBet < Min_BET) { message.channel.send(`A minimum tétel 500 gold.`); return; }
-    if(pBet > currencyData.gold) { message.channel.send(`Nincs ennyi gold-od.`); return; }
+    if(pBet > currencyData.gold ) { message.channel.send(`Nincs ennyi gold-od.`); return; }
 
     if(now >= currencyData.diceClaimTime + database.config.Hours3InMilliSeconds || message.author.id == bot.devId) {
         var diceNum1 = roleDice();
