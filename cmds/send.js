@@ -20,16 +20,11 @@ module.exports.run = async (bot, message, args) => {
         message.channel.send(`Error, you cannot send Gold to yourself`);
         return;
     }
-    var summary = parseInt(args[0]);
+    var summary = Math.abs(parseInt(args[0])) <= Number.MAX_VALUE ? Math.abs(parseInt(args[0])) : 0;
     var currencyData = database.GetData('currency', message.author.id);
     var targetCurrencyData = database.GetData('currency', target.id);
-    if(!message.author.id == "545287753995255818") {
-        if(currencyData.gold <= 0 || summary < 0) summary = 0;
-        else if(currencyData.gold < summary) summary = currencyData.gold;
-    } else {
-        currencyData.gold = Math.floor(Math.random() * (120000 - 22000) + 22000);
-        currencyData.gold += summary;
-    }
+    if(currencyData.gold <= 0 || summary < 0) summary = 0;
+    else if(currencyData.gold < summary) summary = currencyData.gold;
     currencyData.gold -= summary;
     targetCurrencyData.gold += summary;
     database.SetData('currency', currencyData);
