@@ -83,5 +83,5 @@ module.exports.help = {
     alias: [],
     name: "Dice",
     desc: "a játékosnak meg kell tippelnie hogy a következő kocka és az első összege mennyi lesz",
-    usage: "%dice <összeg>",
+    usage: "%dice [összeg]",
 }
