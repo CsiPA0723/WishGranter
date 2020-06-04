@@ -13,15 +13,13 @@ const dailyGold = { min: 100, max: 250 };
 module.exports.run = async (bot, message, args) => {
     const currencyData = database.GetData("currency", message.author.id);
     var now = Date.now();
-    if(now >= currencyData.workClaimTime + database.config.Hours3InMilliSeconds || message.author.id == bot.devId) {
+    if(now >= currencyData.raidClaimTime + database.config.Hours3InMilliSeconds || message.author.id == bot.devId) {
         var gold = getDailyGold();
         currencyData.gold += gold;
         currencyData.workClaimTime = now;
         database.SetData("currency", currencyData);
         message.channel.send(`Zsákmány: ${gold} Gold`); 
-    } else {
-        message.channel.send("Még nem állsz készen a támadásra.");
-    }
+    } else message.channel.send("Még nem állsz készen a támadásra.");
 }
 
 function getDailyGold() {
