@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const database = require('../database');
 
 const Min_BET = 500;
-const Multiplyer = 3;
+const Multiplyer = 2;
 
 /**
  * @param {Discord.Client} bot The bot itself.
