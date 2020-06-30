@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args) => {
     if(now >= currencyData.raidClaimTime + database.config.Hours3InMilliSeconds || message.author.id == bot.devId) {
         var gold = getDailyGold();
         currencyData.gold += gold;
-        currencyData.workClaimTime = now;
+        currencyData.raidClaimTime = now;
         database.SetData("currency", currencyData);
         message.channel.send(`Zsákmány: ${gold} Gold`); 
     } else message.channel.send("Még nem állsz készen a támadásra.");
