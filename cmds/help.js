@@ -36,7 +36,7 @@ module.exports.run = (bot, message, args) => {
         }
     }
 
-    const embed = new Discord.RichEmbed()
+    const embed = new Discord.MessageEmbed()
         .setTitle("Parancslista")
         .setColor(message.guild.member(bot.user).displayHexColor)
         .addField("Jelek jelentése:", "<opcionális> | [kötelező]")

@@ -11,8 +11,8 @@ const database = require('../database');
 
 module.exports.run = async (bot, message, args) => {
     const currencyData = database.GetData("currency", message.author.id);
-    const embed = new Discord.RichEmbed()
-        .setAuthor(message.author.username, message.author.avatarURL)
+    const embed = new Discord.MessageEmbed()
+        .setAuthor(message.author.username, message.author.avatarURL({size: 4096, format: "png", dynamic: true}))
         .setTitle("Balance")
         .setDescription(`BALANCE: ${currencyData.gold} Gold`);
 

@@ -26,7 +26,7 @@ module.exports.run = async (bot, message, args) => {
         var diceNum2 = roleDice();
         var sum = diceNum1 + diceNum2;
 
-        var embed = new Discord.RichEmbed()
+        var embed = new Discord.MessageEmbed()
             .setDescription(
                 `Kockajáték ${pBet} gold összeggel
                 Szorzó: ${Multiplyer}x
@@ -64,7 +64,7 @@ module.exports.run = async (bot, message, args) => {
                     if(msg.deletable) msg.delete();
                     database.SetData('currency', currencyData);
                     collector.stop("match");
-                } else message.channel.send("Csak 2 és 12 között tippelhetsz.").then(m => m.delete(5000));
+                } else message.channel.send("Csak 2 és 12 között tippelhetsz.").then(m => m.delete({timeout: 5000}));
             });
 
             collector.on('end', (collected, reason) => {

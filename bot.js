@@ -39,8 +39,8 @@ bot.logDate = (timestamp) => {
 bot.on('ready', () => {
     database.Prepare('currency');
 
-    mainGuild = bot.guilds.get('662018979082010664');
-    devLogChannel = bot.guilds.get('427567526935920655').channels.get('693080450406678528');
+    mainGuild = bot.guilds.resolve('662018979082010664');
+    devLogChannel = bot.guilds.resolve('427567526935920655').channels.resolve('693080450406678528');
 
     bot.mainGuild = mainGuild;
     bot.devLogChannel = devLogChannel;
@@ -71,7 +71,7 @@ bot.on('message', async message => {
                 var evaled = eval(code);
     
                 if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
-                message.channel.send(clean(evaled), {code:"xl", split: [{char: '\n'}] }).catch(error => {
+                message.channel.send(clean(evaled), {code:"xl", split: {char: '\n'} }).catch(error => {
                     console.error(`${error.name}: ${error.message}\nStack: ${error.stack}`);
                 });
             } catch (err) {
@@ -148,7 +148,7 @@ async function shutdown(message, text) {
     if(devLogChannel) await devLogChannel.send(`\`${text}\``);
     await message.channel.send(`\`${text}\``);
     console.log(text);
-    await bot.destroy().catch(console.error);
+    bot.destroy();
     process.exit(0);
 }
 
