@@ -79,12 +79,12 @@ export default {
             const embed = new MessageEmbed()
                 .setTimestamp(Date.now())
                 .setColor("RED")
-                .setTitle("Hiba")
-                .setDescription("```Hiányos parancs```")
+                .setTitle("Error")
+                .setDescription("```md\nIncomplete command!```")
                 .addFields([
-                    { name: "Segítsgég", value: `\`\`\`md\n${cmd.usage}\`\`\``, inline: false },
-                    { name: "További segítségért írd", value: `\`\`\`md\n${Settings.Prefix}help ${cmd.name}\`\`\``, inline: true },
-                ]).setFooter(`Hiba esetén kérlek értesísd készítőmet! ${client.users.resolve(client.devId).tag}`);
+                    { name: "Help", value: `\`\`\`md\n${cmd.usage}\`\`\``, inline: false },
+                    { name: "For More Help", value: `\`\`\`md\n${Settings.Prefix}help ${cmd.name}\`\`\``, inline: true },
+                ]).setFooter(`In case of an error, please contact my author:! ${client.users.resolve(client.devId).tag}`);
             return embed;
         },
 
@@ -92,12 +92,12 @@ export default {
             const embed = new MessageEmbed()
                 .setTimestamp(Date.now())
                 .setColor("RED")
-                .setTitle("Hiba")
-                .setDescription(`\`\`\`${desc}\`\`\``)
+                .setTitle("Error")
+                .setDescription(`\`\`\`md\n${desc}\`\`\``)
                 .addFields([
-                    { name: "Segítsgég", value: `\`\`\`md\n${cmd.usage}\`\`\``, inline: false },
-                    { name: "További segítségért írd", value: `\`\`\`md\n${Settings.Prefix}help ${cmd.name}\`\`\``, inline: true },
-                ]).setFooter(`Hiba esetén kérlek értesísd készítőmet! ${client.users.resolve(client.devId).tag}`);
+                    { name: "Help", value: `\`\`\`md\n${cmd.usage}\`\`\``, inline: false },
+                    { name: "For More Help", value: `\`\`\`md\n${Settings.Prefix}help ${cmd.name}\`\`\``, inline: true },
+                ]).setFooter(`In case of an error, please contact my author:! ${client.users.resolve(client.devId).tag}`);
             return embed;
         },
 
@@ -105,9 +105,9 @@ export default {
             const embed = new MessageEmbed()
                 .setTimestamp(Date.now())
                 .setColor("GREEN")
-                .setTitle("Segítségért írd be")
+                .setTitle("For help write:")
                 .setDescription(`\`\`\`md\n${Settings.Prefix}help\`\`\``)
-                .setFooter(`Hiba esetén kérlek értesísd készítőmet! ${client.users.resolve(client.devId).tag}`);
+                .setFooter(`In case of an error, please contact my author:! ${client.users.resolve(client.devId).tag}`);
             return embed;
         }
     },
