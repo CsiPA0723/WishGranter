@@ -28,7 +28,7 @@ class BotInfo implements BaseCommand {
                 **Guild count:** *${bot.guilds.cache.size}*
                 **Channel count:** *${bot.channels.cache.size}*
                 **User count:** *${bot.users.cache.size}*\n
-                **Uptime:** *${Tools.ParseMillisecondsIntoReadableTime(bot.uptime)}*`
+                **Uptime:** *${Tools.RedableTime(bot.uptime)}*`
             )
             .setThumbnail(bot.user.displayAvatarURL({ size: 4096, format: "png", dynamic: true }))
             .setColor(message.guild.member(bot.user).displayHexColor);
