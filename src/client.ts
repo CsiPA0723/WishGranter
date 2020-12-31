@@ -29,7 +29,7 @@ process.env.mode = Config.mode;
 import Settings from "./settings.json";
 import CommandHandler from "./command-handler";
 import EventHandler from "./event-handler";
-// import Database from "./systems/database";
+import Database from "./systems/database";
 import EmbedTemplates from "./utils/embed-templates";
 
 import colors from "colors";
@@ -55,7 +55,7 @@ const statuses = [`${Settings.Prefix}help`, "Made By CsiPA0723#0423"];
 client.on("ready", async () => {
     client.logChannel = <TextChannel>client.channels.resolve(Settings.Channels.modLogId);
     
-    // await Database.Connect().catch(console.error);
+    await Database.Connect().catch(console.error);
 
     console.log("Ready!");
 
@@ -84,7 +84,7 @@ async function errorHandling(err: Error | any, msg: string, toShutdown = false) 
         const embed = EmbedTemplates.Error(logMsg);
         if(client.logChannel) await client.logChannel.send({ embed: embed }).catch(console.error);
         if(toShutdown) {
-            // await Database.Connection.end().then(() => console.log("Database shutdown"));
+            await Database.Connection.end().then(() => console.log("Database shutdown"));
             client.setTimeout(() => { client.destroy(); }, 2000);
         }
     } catch (error) {
