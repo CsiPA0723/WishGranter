@@ -33,6 +33,7 @@ class Database {
      */
     public static async GetData(tableName: "Currency", id: string): Promise<Currency>;
     public static async GetData(tableName: "Users", id: string): Promise<Users>;
+    public static async GetData(tableName: "Item", id: string): Promise<Item>;
     public static async GetData(tableName: string, id: string): Promise<any> {
         if(!this.Connection) return Promise.reject(new Error("No connection to database"));
         tableName = FirstCharUpperCase(tableName);
@@ -50,6 +51,7 @@ class Database {
      */
     public static async SetData(tableName: "Currency", data: Currency): Promise<any>;
     public static async SetData(tableName: "Users", data: Users): Promise<any>;
+    public static async SetData(tableName: "Item", data: Item): Promise<any>;
     public static async SetData(tableName: any, data: any): Promise<any> {
         if(!this.Connection) return Promise.reject(new Error("No connection to database"));
         if(typeof data !== "object") return Promise.reject(new Error("Data must be an object!"));
@@ -100,6 +102,7 @@ class Database {
      */
     public static async DeleteData(tableName: "Currency", id: string): Promise<any>;
     public static async DeleteData(tableName: "Users", id: string): Promise<any>;
+    public static async DeleteData(tableName: "Item", id: string): Promise<any>;
     public static async DeleteData(tableName: string, id: any): Promise<any> {
         if(!this.Connection) return Promise.reject(new Error("No connection to database"));
         tableName = FirstCharUpperCase(tableName);
@@ -111,22 +114,22 @@ export default Database;
 
 export interface Currency {
     id: string;
-    bits?: number;
-    claimTime?: number;
-    streak?: number;
+    balance?: number;
+    raidUseTime?: number;
+    expolreUseTime?: number;
+    diceUseTime?: number;
 }
 
 export interface Users {
     id: string;
     tag?: string;
-    exp?: number;
-    level?: number;
-    spams?: number;
-    blLinks?: number;
-    kicks?: number;
-    bans?: number;
-    warns?: number;
-    allTime?: number;
-    messages?: number;
-    commandUses?: number;
+    /** Item ids seperated by commas ( ; ) */
+    inventory?: string;
+}
+
+export interface Item {
+    id: number;
+    name: string;
+    alias: string;
+    price: number;
 }

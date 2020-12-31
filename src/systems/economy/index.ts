@@ -26,9 +26,10 @@ class Economy {
             if(!userData) {
                 userData = {
                     id: member.id,
-                    bits: 0,
-                    claimTime: 0,
-                    streak: 0
+                    balance: 0,
+                    raidUseTime: 0,
+                    expolreUseTime: 0,
+                    diceUseTime: 0
                 }
                 await Database.SetData("Currency", userData);
             }
@@ -46,21 +47,22 @@ class Economy {
             if(!userData) {
                 userData = {
                     id: member.id,
-                    bits: 0,
-                    claimTime: 0,
-                    streak: 0
+                    balance: 0,
+                    raidUseTime: 0,
+                    expolreUseTime: 0,
+                    diceUseTime: 0
                 }
             }
     
-            if(amount > this.MAX_MONEY) userData.bits = this.MAX_MONEY;
-            else userData.bits += amount;
+            if(amount > this.MAX_MONEY) userData.balance = this.MAX_MONEY;
+            else userData.balance += amount;
     
             await Database.SetData("Currency", userData);
 
             this.Log("ADD", {
                 member: member,
                 amount: amount,
-                balance: userData.bits
+                balance: userData.balance
             }, reason);
 
             return Promise.resolve(userData);
@@ -75,21 +77,22 @@ class Economy {
             if(!userData) {
                 userData = {
                     id: member.id,
-                    bits: 0,
-                    claimTime: 0,
-                    streak: 0
+                    balance: 0,
+                    raidUseTime: 0,
+                    expolreUseTime: 0,
+                    diceUseTime: 0
                 }
             }
     
-            if(amount < this.MIN_MONEY) userData.bits = this.MIN_MONEY;
-            else userData.bits -= amount;
+            if(amount < this.MIN_MONEY) userData.balance = this.MIN_MONEY;
+            else userData.balance -= amount;
     
             await Database.SetData("Currency", userData);
 
             this.Log("REMOVE", {
                 member: member,
                 amount: amount,
-                balance: userData.bits
+                balance: userData.balance
             }, reason);
             
             return Promise.resolve(userData);
@@ -108,9 +111,10 @@ class Economy {
             if(!fromUserData) {
                 fromUserData = {
                     id: fromMember.id,
-                    bits: 0,
-                    claimTime: 0,
-                    streak: 0
+                    balance: 0,
+                    raidUseTime: 0,
+                    expolreUseTime: 0,
+                    diceUseTime: 0
                 };
                 response = ResponseTypes.INSUFFICIENT;
             }
@@ -118,15 +122,16 @@ class Economy {
             if(!toUserData) {
                 toUserData = {
                     id: toMember.id,
-                    bits: 0,
-                    claimTime: 0,
-                    streak: 0
+                    balance: 0,
+                    raidUseTime: 0,
+                    expolreUseTime: 0,
+                    diceUseTime: 0
                 };
             }
 
-            if(fromUserData.bits >= amount) {
-                toUserData.bits += amount;
-                fromUserData.bits -= amount;
+            if(fromUserData.balance >= amount) {
+                toUserData.balance += amount;
+                fromUserData.balance -= amount;
                 response = ResponseTypes.DONE;
             } else response = ResponseTypes.INSUFFICIENT;
 
@@ -137,9 +142,9 @@ class Economy {
                 this.Log("TRANSFER", {
                     member: fromMember,
                     amount: amount,
-                    balance: fromUserData.bits,
+                    balance: fromUserData.balance,
                     toMember: toMember,
-                    toBalance: toUserData.bits
+                    toBalance: toUserData.balance
                 }, reason);
             }
 
