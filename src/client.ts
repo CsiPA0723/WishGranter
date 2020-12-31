@@ -54,6 +54,7 @@ const statuses = [`${Settings.Prefix}help`, "Made By CsiPA0723#0423"];
 
 client.on("ready", async () => {
     client.logChannel = <TextChannel>client.channels.resolve(Settings.Channels.modLogId);
+    client.economyLogChannel = <TextChannel>client.channels.resolve(Settings.Channels.economyLogId);
     
     await Database.Connect().catch(console.error);
 
