@@ -112,6 +112,20 @@ export default {
         }
     },
 
+    Jobs: (message: Message, type: "SUCCESS"|"FAILED"|"COOLDOWN", text: string) => {
+        let color: string;
+        if(type === "SUCCESS") color = "GREEN";
+        else if(type === "FAILED") color = "RED";
+        else if(type === "COOLDOWN") color = "BLUE";
+
+        const embed = new MessageEmbed()
+            .setAuthor(message.member.user.tag, message.member.user.displayAvatarURL({ size: 4096, format: "png", dynamic: true }))
+            .setColor(color)
+            .setDescription(text)
+            .setTimestamp(Date.now());
+        return embed;
+    },
+
     Online: (mode: string): MessageEmbed => {
         const embed = new MessageEmbed()
             .setColor("GREEN")
