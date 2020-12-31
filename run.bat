@@ -1,4 +1,4 @@
 @echo off
-title WishGranter
-node bot.js
+title Wishgranter
+npm run build && npm run start
 cmd /k
