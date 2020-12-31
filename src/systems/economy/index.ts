@@ -1,5 +1,4 @@
 import { GuildMember, MessageEmbed } from "discord.js";
-import Tools from "../../utils/tools";
 import Database from "../database";
 
 export enum ResponseTypes {
@@ -18,11 +17,6 @@ class Economy {
     public static readonly MAX_MONEY = 1_000_000;
     public static readonly MIN_MONEY = -1_000_000;
 
-    public static readonly DAILY_AMOUNT = 250; // Bits
-    public static readonly DAILY_STREAK_BONUS = 750; // Bits
-    public static readonly WUMPUS_ROLE_COST = 5_500; // Bits
-    public static readonly CUSTOM_EMOJI_COST = 2_500; // Bits
-
     public static readonly DAY_IN_MILLIS = 86_400_000;
 
     public static async GetInfo(member: GuildMember) {
@@ -40,63 +34,6 @@ class Economy {
             }
 
             return Promise.resolve(userData);
-        } catch (error) {
-            return Promise.reject(error);
-        }
-    }
-
-    public static async Daily(member: GuildMember) {
-        try {
-            const timeNow = Date.now();
-            const nextDayInMillis = Tools.GetNextDayInMillis();
-
-            let userData = await Database.GetData("Currency", member.id);
-
-            if(!userData) {
-                userData = {
-                    id: member.id,
-                    bits: this.DAILY_AMOUNT,
-                    claimTime: timeNow,
-                    streak: 1
-                }
-
-                await Database.SetData("Currency", userData);
-
-                this.Log("ADD", {
-                    member: member,
-                    amount: this.DAILY_AMOUNT,
-                    bits: userData.bits
-                }, "Daily claim.");
-
-                return Promise.resolve({ userData, streakDone: false });
-            }
-
-            if(member.client.devId === member.id || userData.claimTime <= nextDayInMillis) {
-                if(userData.claimTime <= nextDayInMillis - (this.DAY_IN_MILLIS * 2)) {
-                    userData.streak = 0;
-                }
-                userData.claimTime = timeNow + this.DAY_IN_MILLIS;
-                userData.bits += this.DAILY_AMOUNT;
-                if(userData.streak >= 5) userData.streak = 0;
-                userData.streak++;
-                let streakDone = false;
-                if(userData.streak === 5) {
-                    userData.bits += this.DAILY_STREAK_BONUS;
-                    streakDone = true;
-                }
-            
-                await Database.SetData("Currency", userData);
-
-                this.Log("ADD", {
-                    member: member,
-                    amount: streakDone ? this.DAILY_AMOUNT + this.DAILY_STREAK_BONUS : this.DAILY_AMOUNT,
-                    bits: userData.bits
-                }, "Daily claim.");
-
-                return Promise.resolve({ userData, streakDone });
-            }
-
-            return Promise.resolve<null>(null);
         } catch (error) {
             return Promise.reject(error);
         }
@@ -123,7 +60,7 @@ class Economy {
             this.Log("ADD", {
                 member: member,
                 amount: amount,
-                bits: userData.bits
+                balance: userData.bits
             }, reason);
 
             return Promise.resolve(userData);
@@ -152,7 +89,7 @@ class Economy {
             this.Log("REMOVE", {
                 member: member,
                 amount: amount,
-                bits: userData.bits
+                balance: userData.bits
             }, reason);
             
             return Promise.resolve(userData);
@@ -200,9 +137,9 @@ class Economy {
                 this.Log("TRANSFER", {
                     member: fromMember,
                     amount: amount,
-                    bits: fromUserData.bits,
+                    balance: fromUserData.bits,
                     toMember: toMember,
-                    toBits: toUserData.bits
+                    toBalance: toUserData.bits
                 }, reason);
             }
 
@@ -215,34 +152,34 @@ class Economy {
     private static Log(type: "ADD", options: {
         member: GuildMember,
         amount: number,
-        bits: number
+        balance: number
     }, reason?: string): any;
     private static Log(type: "REMOVE", options: {
         member: GuildMember,
         amount: number,
-        bits: number
+        balance: number
     }, reason?: string): any;
     private static Log(type: "TRANSFER", options: {
         member: GuildMember,
         amount: number,
-        bits: number,
+        balance: number,
         toMember: GuildMember,
-        toBits: number
+        toBalance: number
     }, reason?: string): any;
     private static Log(type: "ADD"|"REMOVE"|"TRANSFER", options: any, reason = "Nincs megadva.") {
-        const { member, amount, bits } = options;
+        const { member, amount, balance } = options;
         const embed = new MessageEmbed()
             .setTimestamp(Date.now())
             .setColor("#78b159")
-            .setTitle(`${LogTypeHelp[type]} (Bits)`)
+            .setTitle(`${LogTypeHelp[type]} (Gold)`)
             .addFields([
                 { name: "Felhasználó", value: `${member}`, inline: false },
-                { name: "Menyiség", value: `\`\`\`${amount} bits\`\`\``, inline: true },
-                { name: "Egyenleg", value: `\`\`\`${bits} bits\`\`\``, inline: true }
+                { name: "Menyiség", value: `\`\`\`${amount} Gold\`\`\``, inline: true },
+                { name: "Egyenleg", value: `\`\`\`${balance} Gold\`\`\``, inline: true }
             ]);
 
         if(type === "TRANSFER") {
-            const { toMember, toBits } = options;
+            const { toMember, toBalance } = options;
             embed.fields[0] = {
                 name: "Felhasználók",
                 value: `${member} => ${toMember}`,
@@ -251,7 +188,7 @@ class Economy {
             embed.fields[1].inline = false;
             embed.fields[2].name = `${member.displayName} egyenlege`
             embed.fields[2].inline = false;
-            embed.addField(`${toMember.displayName} egyenlege`, `\`\`\`${toBits} bits\`\`\``, false);
+            embed.addField(`${toMember.displayName} egyenlege`, `\`\`\`${toBalance} Gold\`\`\``, false);
         }
 
         embed.addField("Ok",`\`\`\`${reason}\`\`\``, false);
