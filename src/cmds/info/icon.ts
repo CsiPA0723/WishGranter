@@ -10,15 +10,15 @@ class Icon implements BaseCommand {
 
     name = "icon";
     aliases = ["servericon", "ico"];
-    desc = "Megjeleníti a szerver ikont.";
+    desc = "Gets the server's icon.";
     usage = `${Prefix}icon`;
 
     public async execute(message: Message) {
-        if(!message.guild.iconURL()) return message.channel.send("Ennek a szervernek nincsen ikonja.");
-        const msg = await message.channel.send("Szerver ikon lehívása...");
+        if(!message.guild.iconURL()) return message.channel.send("This server does not have an icon.");
+        const msg = await message.channel.send("Fetching Server icon..");
         const embed = new MessageEmbed()
-            .setTitle("Szerver Ikon")
-            .setDescription(`[Ikon LINK](${message.guild.iconURL({ format: "png", size: 4096 })})`)
+            .setTitle("Server Icon")
+            .setDescription(`[Icon LINK](${message.guild.iconURL({ format: "png", size: 4096 })})`)
             .setImage(message.guild.iconURL({ format: "png", size: 4096 }))
             .setColor(message.member.displayHexColor);
 

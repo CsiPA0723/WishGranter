@@ -11,24 +11,24 @@ class BotInfo implements BaseCommand {
 
     name = "botinfo";
     aliases = ["bot"];
-    desc = "A botról elérhető információk.";
+    desc = "Information of the bot.";
     usage = `${Prefix}botinfo`;
     public async execute(message: Message) {
-        const msg = await message.channel.send("Generálás...");
+        const msg = await message.channel.send("Genrating...");
         const bot = message.client;
         const embed = new MessageEmbed()
             .setAuthor(bot.user.username)
             .setTitle("Bot information:")
             .setDescription(
-                `**Tejles név:** *${bot.user.username}#${bot.user.discriminator}*
+                `**Fullname:** *${bot.user.username}#${bot.user.discriminator}*
                 **ID:** *${bot.user.id}*\n
-                **Státusz:** *${bot.user.presence.status}*
-                **Létrehozva:** *${bot.user.createdAt}*\n
-                **Készítő:** *${message.guild.member("333324517730680842") || "CsiPA0723#0423"}*
-                **Guildek száma:** *${bot.guilds.cache.size}*
-                **Szobák száma:** *${bot.channels.cache.size}*
-                **Felhasználók száma:** *${bot.users.cache.size}*\n
-                **Futási idő:** *${Tools.ParseMillisecondsIntoReadableTime(bot.uptime)}*`
+                **State:** *${bot.user.presence.status}*
+                **Created at:** *${bot.user.createdAt}*\n
+                **Author:** *${message.guild.member("333324517730680842") || "CsiPA0723#0423"}*
+                **Guild count:** *${bot.guilds.cache.size}*
+                **Channel count:** *${bot.channels.cache.size}*
+                **User count:** *${bot.users.cache.size}*\n
+                **Uptime:** *${Tools.ParseMillisecondsIntoReadableTime(bot.uptime)}*`
             )
             .setThumbnail(bot.user.displayAvatarURL({ size: 4096, format: "png", dynamic: true }))
             .setColor(message.guild.member(bot.user).displayHexColor);

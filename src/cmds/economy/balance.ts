@@ -11,7 +11,7 @@ class Balance implements BaseCommand {
 
     name = "balance";
     aliases = ["bal"];
-    desc = "Az egyenleged";
+    desc = "Your balance";
     usage = `${Prefix}balance`;
 
     /**

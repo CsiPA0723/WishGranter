@@ -10,43 +10,43 @@ class ServerInfo implements BaseCommand {
 
     name = "serverinfo";
     aliases = ["server", "guild", "guildinfo"];
-    desc = "Kiírja a szerverről való információkat.";
+    desc = "Gets server information";
     usage = `${Prefix}serverinfo`;
     
     public async execute(message: Message) {
-        const msg = await message.channel.send("Generálás...");
+        const msg = await message.channel.send("Generating...");
         const guild = message.guild;
         const explicitLeves = {
-            DISABLED: "Kikapcsolva",
-            MEMBERS_WITHOUT_ROLES: "Rang nélkülieknek",
-            ALL_MEMBERS: "Mindenkinek"
+            DISABLED: "Do not scan any media content.",
+            MEMBERS_WITHOUT_ROLES: "Scan media content from members without a role.",
+            ALL_MEMBERS: "Scan media content from all members."
         };
         const verificationLevel = {
-            NONE: "Nincs",
-            LOW: "Ellenőrzött e-mail",
-            MEDIUM: "Ellenőrzött e-mail, 5 percnél tovább van beregisztrálva a Discordra",
-            HIGH: "Ellenőrzött e-mail, 5 percnél tovább van beregisztrálva a Discordra, 10 perce tagja a szervernek",
-            VERY_HIGH: "Ellenőrzött e-mail, 5 percnél tovább van be regisztálva a Discordra, 10 perce tagja a szervernek, Telefonos duplalépcsős belépés"
+            NONE: "Unrestricted",
+            LOW: "Must have a verified email.",
+            MEDIUM: "Verified email, registered on Discord for longer than 5 minutes.",
+            HIGH: "Verified email, registered on Discord for longer than 5 minutes, member of this server for longer than 10 minutes.",
+            VERY_HIGH: "Verified email, registered on Discord for longer than 5 minutes, member of this server for longer than 10 minutes, must have verified phone on their Discord account."
         };
         const embed = new MessageEmbed()
-            .setTitle("Szerver információk")
+            .setTitle("Server information")
             .setThumbnail(guild.iconURL({ format: "png", size: 4096 }))
             .addFields([
-                { name: "Szerver Név", value: `\`\`\`${guild.name}\`\`\``, inline: true },
-                { name: "Szerver ID", value: `\`\`\`xl\n${guild.id}\`\`\``, inline: true },
+                { name: "Server Name", value: `\`\`\`${guild.name}\`\`\``, inline: true },
+                { name: "Server ID", value: `\`\`\`xl\n${guild.id}\`\`\``, inline: true },
                 { name: "\u200b", value: "\u200b", inline: false },
-                { name: "Képek ellenőrzése", value: `\`\`\`${explicitLeves[guild.explicitContentFilter]}\`\`\``, inline: true },
-                { name: "Régió", value: `\`\`\`${guild.region}\`\`\``, inline: true },
-                { name: "Ellenőrzési Szint", value: `\`\`\`${verificationLevel[guild.verificationLevel]}\`\`\``, inline: false },
+                { name: "Expilict media content filter", value: `\`\`\`${explicitLeves[guild.explicitContentFilter]}\`\`\``, inline: true },
+                { name: "Region", value: `\`\`\`${guild.region}\`\`\``, inline: true },
+                { name: "Verification level", value: `\`\`\`${verificationLevel[guild.verificationLevel]}\`\`\``, inline: false },
                 { name: "\u200b", value: "\u200b", inline: false },
-                { name: "Tulajdonos", value: `${guild.owner}`, inline: false },
-                { name: "Tulajdonos Tag-je", value: `\`\`\`${guild.owner.user.tag}\`\`\``, inline: true },
-                { name: "Tulajdonos ID-ja", value: `\`\`\`xl\n${guild.ownerID}\`\`\``, inline: true },
+                { name: "Owner", value: `${guild.owner}`, inline: false },
+                { name: "Owner's Tag", value: `\`\`\`${guild.owner.user.tag}\`\`\``, inline: true },
+                { name: "Owner's ID", value: `\`\`\`xl\n${guild.ownerID}\`\`\``, inline: true },
                 { name: "\u200b", value: "\u200b", inline: false },
-                { name: "Létrehozva", value: message.client.logDate(guild.createdTimestamp), inline: false },
-                { name: "Tagok Száma", value: guild.members.cache.filter(m => !m.user.bot).size, inline: true },
-                { name: "Botok Száma", value: guild.members.cache.filter(m => m.user.bot).size, inline: true },
-                { name: "Szobák száma", value: guild.channels.cache.size, inline: true }
+                { name: "Created at", value: message.client.logDate(guild.createdTimestamp), inline: false },
+                { name: "Members", value: guild.members.cache.filter(m => !m.user.bot).size, inline: true },
+                { name: "Bots", value: guild.members.cache.filter(m => m.user.bot).size, inline: true },
+                { name: "Channels", value: guild.channels.cache.size, inline: true }
             ])
             .setTimestamp(Date.now())
             .setColor(guild.member(message.client.user.id).displayHexColor);

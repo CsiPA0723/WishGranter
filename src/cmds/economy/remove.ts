@@ -13,8 +13,8 @@ class Remove implements BaseCommand {
 
     name = "remove";
     aliases = [];
-    desc = "(STAFF) Ezzel a parancsal tudsz megvonni Gold-ot a felhasználókntól.";
-    usage = `${Prefix}remove <felhasználó> [mennyiség] (Ha nincsen felhasználó megadva akkor te leszel.)`;
+    desc = "(STAFF) Remove Gold from a user's balance.";
+    usage = `${Prefix}remove <user> [amount] (If user not defined, you will be)`;
 
     /**
      * @param message Discord message.
@@ -23,12 +23,12 @@ class Remove implements BaseCommand {
     public async execute(message: Message, args?: string[]) {
         if(!message.member.hasPermission(Permissions.FLAGS.ADMINISTRATOR, { checkAdmin: true, checkOwner: true })
           && message.author.id != message.client.devId) {
-            return message.channel.send("Nincs jogod ehhez a parancshoz.");
+            return message.channel.send("Missing permissions.");
         }
 
         const target = Tools.GetMember(message, args);
         if(!target) {
-            const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "Nem találtam ilyen felhasználót.", this);
+            const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "User not found.", this);
             return message.channel.send(embed);
         }
 
@@ -36,7 +36,7 @@ class Remove implements BaseCommand {
         if(!isNaN(parseInt(args[0]))) amount = parseInt(args[0]);
         else if(!isNaN(parseInt(args[1]))) amount = parseInt(args[1]);
         else {
-            const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "Mennyiség nem volt megadva.", this);
+            const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "Missing amount.", this);
             return message.channel.send(embed);
         }
         
@@ -46,8 +46,8 @@ class Remove implements BaseCommand {
                 .setTimestamp(Date.now())
                 .setColor(Constants.Colors.GOLD)
                 .setTitle("Gold")
-                .setDescription(`${target} egyenlege csökkent ${amount} Gold-al.`)
-                .addField(`${target.displayName} egyenlege`, `\`\`\`${userData.balance} Gold\`\`\``);
+                .setDescription(`From ${target}'s balance removed ${amount} Gold.`)
+                .addField(`${target.displayName}'s balance`, `\`\`\`${userData.balance} Gold\`\`\``);
 
             return message.channel.send(embed);
         });

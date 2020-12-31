@@ -4,16 +4,16 @@ import Tools from "../../utils/tools";
 import { Prefix } from "../../settings.json";
 
 enum CategoryTranslation {
-    analytic = "Analitikus",
-    dev = "Fejlesztő",
+    dev = "Developer",
     economy = "Economy",
-    fun = "Szorakoztató",
-    info = "Infó",
-    misc = "Melékleges",
-    mod = "Moderátor",
+    fun = "Fun",
+    info = "Information",
+    jobs = "Jobs",
+    misc = "Miscellaneous",
+    mod = "Moderator",
     staff = "Staff",
-    test = "Teszt",
-    utility = "Hasznos"
+    test = "Test",
+    utility = "Utility"
 }
 
 class Help implements BaseCommand {
@@ -24,8 +24,8 @@ class Help implements BaseCommand {
 
     name = "help";
     aliases: ["segitseg", "segítség"];
-    desc = "Leírások a parancsokról";
-    usage = `${Prefix}help <oldal / parancs>`;
+    desc = "List of the commands";
+    usage = `${Prefix}help <command>`;
 
     public async execute(message: Discord.Message, args?: string[]) {
         const bot = message.client;
@@ -34,10 +34,10 @@ class Help implements BaseCommand {
 
 
         let embed = new Discord.MessageEmbed()
-            .setTitle("Parancs Lista")
+            .setTitle("List of the commands")
             .setColor(message.guild.member(bot.user).displayHexColor)
-            .setDescription("**`>help <parancs>` » Leírja az adott parancsot.**")
-            .addField("Szímbólumok jelentése:", "<opcionális> | [kötelező]", true);
+            .setDescription(`**\`${Prefix}help <command>\` » For more help.**`)
+            .addField("Symbols:", "<optional> | [must]", true);
 
         if(args[0]) {
             const cmd = commands.get(args[0].toLowerCase()) || commands.find(c => c.aliases && c.aliases.includes(args[0].toLowerCase()));
@@ -47,13 +47,13 @@ class Help implements BaseCommand {
                     .setColor(message.guild.member(bot.user).displayHexColor)
                     .setTimestamp(Date.now())
                     .setDescription(`\`\`\`md\n# ${cmd.desc}\`\`\``)
-                    .addField("Használat:", `\`\`\`md\n${cmd.usage}\`\`\``);
+                    .addField("Usage:", `\`\`\`md\n${cmd.usage}\`\`\``);
                 if(cmd.aliases && cmd.aliases.length > 0) {
-                    embed.addField("Más néven:", `\`>${cmd.aliases.join("` `>")}\``);
+                    embed.addField("Alias:", `\`>${cmd.aliases.join("` `>")}\``);
                 }
-                embed.addField("Szímbólumok jelentése:", "<opcionális> | [kötelező]", true);
+                embed.addField("Symbols:", "<optional> | [must]", true);
                 return message.channel.send({ embed: embed });
-            } else { return message.channel.send("Nem találtam ilyen parancsot."); }
+            } else { return message.channel.send("Command not found."); }
         } else {
             categories.forEach((cmdNames, category) => {
                 if(category !== "dev" && category !== "test") {

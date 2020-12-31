@@ -13,8 +13,8 @@ class Add implements BaseCommand {
 
     name = "add";
     aliases = [];
-    desc = "(STAFF) Ezzel a parancsal tudsz adni Gold-ot a felhasználóknak.";
-    usage = `${Prefix}add <felhasználó> [mennyiség] (Ha nincsen felhasználó megadva akkor te leszel a célszemély.)`;
+    desc = "(STAFF) Add gold to a user's balance.";
+    usage = `${Prefix}add <user> [amount] (If user not defined, you will be)`;
 
     /**
      * @param message Discord message.
@@ -23,12 +23,12 @@ class Add implements BaseCommand {
     public async execute(message: Message, args?: string[]) {
         if(!message.member.hasPermission(Permissions.FLAGS.ADMINISTRATOR, { checkAdmin: true, checkOwner: true })
           && message.author.id != message.client.devId) {
-            return message.channel.send("Nincs jogod ehhez a parancshoz.");
+            return message.channel.send("Missing permissions.");
         }
 
         const target = Tools.GetMember(message, args);
         if(!target) {
-            const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "Nem találtam ilyen felhasználót.", this);
+            const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "User not found.", this);
             return message.channel.send(embed);
         }
 
@@ -36,7 +36,7 @@ class Add implements BaseCommand {
         if(!isNaN(parseInt(args[0]))) amount = parseInt(args[0]);
         else if(!isNaN(parseInt(args[1]))) amount = parseInt(args[1]);
         else {
-            const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "Mennyiség nem volt megadva.", this);
+            const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "Missing amount.", this);
             return message.channel.send(embed);
         }
 
@@ -46,8 +46,8 @@ class Add implements BaseCommand {
                 .setTimestamp(Date.now())
                 .setColor(Constants.Colors.GOLD)
                 .setTitle("Gold")
-                .setDescription(`${target} egyenlege bővült ${amount} Gold-al.`)
-                .addField(`${target.displayName} egyenlege`, `\`\`\`${currencyData.balance} Gold\`\`\``);
+                .setDescription(`Added to ${target}'s balance ${amount} Gold.`)
+                .addField(`${target.displayName}'s balance`, `\`\`\`${currencyData.balance} Gold\`\`\``);
 
             return message.channel.send({ embed: embed });
         });

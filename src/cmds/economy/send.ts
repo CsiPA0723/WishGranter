@@ -13,8 +13,8 @@ class Send implements BaseCommand {
 
     name = "send";
     aliases = ["utal"];
-    desc = "Utalj át másoknak aranyat!";
-    usage = `${Prefix}send [összeg] [név]`;
+    desc = "Sends Gold to another user!";
+    usage = `${Prefix}send [amount] [user]`;
 
     /**
      * @param message Discord message.
@@ -23,34 +23,34 @@ class Send implements BaseCommand {
      public async execute(message: Message, args?: string[]) {
         const target = Tools.GetMember(message, args, false);
         if(!target) {
-            const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "Nem találtam ilyen felhasználót.", this);
+            const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "User not found.", this);
             return message.channel.send(embed);
         }
 
         if(target.id === message.author.id) {
-            const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "Magadnak nem utalhatsz bitet.", this);
+            const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "Can not send to yourself.", this);
             return message.channel.send(embed);
         }
 
         if(target.user.bot) {
-            const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "Botnak nem küldhetsz bitet.", this);
+            const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "Can not send to bots.", this);
             return message.channel.send(embed);
         }
 
         if(!args[1] || isNaN(parseInt(args[1]))) {
-            const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "Mennyiség nem volt megadva.", this);
+            const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "Missing amount.", this);
             return message.channel.send(embed);
         }
 
         let amount = parseInt(args[1]);
         if(amount < 0) {
-            const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "Mennyiség nem lehet negatív.", this);
+            const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "The amount can not be negative.", this);
             return message.channel.send(embed);
         }
 
         Economy.Transfer(message.member, target, amount, "Felhasználói utalás.").then(({fromUserData, toUserData, response}) => {
             if(response === ResponseTypes.INSUFFICIENT) {
-                const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "Jelenleg 0 bited van ezért nem tudsz küldeni másnak.", this);
+                const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "Your account does not have any gold.", this);
                 return message.channel.send(embed);
             }
 
@@ -60,9 +60,9 @@ class Send implements BaseCommand {
                     .setTimestamp(Date.now())
                     .setColor(Constants.Colors.GOLD)
                     .setTitle("Gold")
-                    .setDescription(`${message.member.displayName} átutalt ${amount} Gold-ot ${target} egyenlegébe.`)
-                    .addField(`${target.displayName} egyenlege`, `\`\`\`${toUserData.balance} Gold\`\`\``)
-                    .addField(`${message.member.displayName} egyenlege`, `\`\`\`${fromUserData.balance} Gold\`\`\``);
+                    .setDescription(`${message.member.displayName} sent ${amount} Gold to ${target}.`)
+                    .addField(`${target.displayName}'s balance`, `\`\`\`${toUserData.balance} Gold\`\`\``)
+                    .addField(`${message.member.displayName}'s balance`, `\`\`\`${fromUserData.balance} Gold\`\`\``);
 
                 return message.channel.send(embed);
             }
