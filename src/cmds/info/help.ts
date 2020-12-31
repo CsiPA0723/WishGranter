@@ -23,7 +23,7 @@ class Help implements BaseCommand {
     isDev = false;
 
     name = "help";
-    aliases: ["segitseg", "segítség"];
+    aliases = ["segitseg", "segítség"];
     desc = "List of the commands";
     usage = `${Prefix}help <command>`;
 
@@ -49,7 +49,7 @@ class Help implements BaseCommand {
                     .setDescription(`\`\`\`md\n# ${cmd.desc}\`\`\``)
                     .addField("Usage:", `\`\`\`md\n${cmd.usage}\`\`\``);
                 if(cmd.aliases && cmd.aliases.length > 0) {
-                    embed.addField("Alias:", `\`>${cmd.aliases.join("` `>")}\``);
+                    embed.addField("Alias:", `\`${Prefix}${cmd.aliases.join(`\` \`${Prefix}`)}\``);
                 }
                 embed.addField("Symbols:", "<optional> | [must]", true);
                 return message.channel.send({ embed: embed });
