@@ -28,7 +28,7 @@ class Economy {
                     id: member.id,
                     balance: 0,
                     raidUseTime: 0,
-                    expolreUseTime: 0,
+                    exploreUseTime: 0,
                     diceUseTime: 0
                 }
                 await Database.SetData("Currency", userData);
@@ -49,7 +49,7 @@ class Economy {
                     id: member.id,
                     balance: 0,
                     raidUseTime: 0,
-                    expolreUseTime: 0,
+                    exploreUseTime: 0,
                     diceUseTime: 0
                 }
             }
@@ -79,7 +79,7 @@ class Economy {
                     id: member.id,
                     balance: 0,
                     raidUseTime: 0,
-                    expolreUseTime: 0,
+                    exploreUseTime: 0,
                     diceUseTime: 0
                 }
             }
@@ -113,7 +113,7 @@ class Economy {
                     id: fromMember.id,
                     balance: 0,
                     raidUseTime: 0,
-                    expolreUseTime: 0,
+                    exploreUseTime: 0,
                     diceUseTime: 0
                 };
                 response = ResponseTypes.INSUFFICIENT;
@@ -124,7 +124,7 @@ class Economy {
                     id: toMember.id,
                     balance: 0,
                     raidUseTime: 0,
-                    expolreUseTime: 0,
+                    exploreUseTime: 0,
                     diceUseTime: 0
                 };
             }

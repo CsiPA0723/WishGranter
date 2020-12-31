@@ -116,7 +116,7 @@ export interface Currency {
     id: string;
     balance?: number;
     raidUseTime?: number;
-    expolreUseTime?: number;
+    exploreUseTime?: number;
     diceUseTime?: number;
 }
 
