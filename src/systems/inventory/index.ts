@@ -87,6 +87,7 @@ class InventoryManager {
     private static StringToInventory(str: string) {
         let inventory: InventoryItem[] = [];
         const invItems = str.split(";");
+        if(invItems[0] === "") return inventory;
         for(const itemId of invItems) {
             const item = this.Items.find(i => i.id.toString() === itemId);
             if(!item) throw new Error(`Item id of ${itemId} not found in InventoryManager.Items!`);
