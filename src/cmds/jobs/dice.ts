@@ -96,8 +96,8 @@ class Dice implements BaseCommand {
             } else {
                 const { hours, minutes, seconds } = tools.ParseMilliseconds(currencyData.diceUseTime + Dice.COOLDOWN_TIME_MILLIS - now);
                 const time = `${hours ? hours+" Hour(s)": ""} ${minutes ? minutes+" Minute(s)" : ""} ${seconds ? seconds+" Sec(s)" : ""}`;
-                const text = `⏱️ Let's wait a litle bit before going another round. Remaining: ${time}`;
-                return message.channel.send(embedTemplates.Jobs(message, "COOLDOWN", text));
+                const text = "⏱️ Let's wait a litle bit before going another round.";
+                return message.channel.send(embedTemplates.Jobs(message, "COOLDOWN", text).addField("Remaining", `\`\`\`${time}\`\`\``));
             }
         } catch (error) {
             return Promise.reject(error);

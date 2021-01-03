@@ -31,6 +31,7 @@ import CommandHandler from "./command-handler";
 import EventHandler from "./event-handler";
 import Database from "./systems/database";
 import EmbedTemplates from "./utils/embed-templates";
+import InventoryManager from "./systems/inventory";
 
 import colors from "colors";
 
@@ -45,6 +46,7 @@ client.EventHandler = new EventHandler(client);
 
 import dateFormat from "dateformat";
 import { Clean } from "./utils/tools";
+
 client.logDate = (timestamp: number) => {
     if(!timestamp) timestamp = Date.now();
     return dateFormat(timestamp, "yyyy-mm-dd | HH:MM:ss 'GMT'o");
@@ -57,6 +59,7 @@ client.on("ready", async () => {
     client.economyLogChannel = <TextChannel>client.channels.resolve(Settings.Channels.economyLogId);
     
     await Database.Connect().catch(console.error);
+    await InventoryManager.UpdateItems();
 
     console.log("Ready!");
 

@@ -48,8 +48,8 @@ class Explore implements BaseCommand {
             } else {
                 const { hours, minutes, seconds } = tools.ParseMilliseconds(currencyData.exploreUseTime + Explore.COOLDOWN_TIME_MILLIS - now);
                 const time = `${hours ? hours+" Hour(s)": ""} ${minutes ? minutes+" Minute(s)" : ""} ${seconds ? seconds+" Sec(s)" : ""}`;
-                const text = `⏱️ You are not ready for an explore. Remaining: ${time}`;
-                return message.channel.send(embedTemplates.Jobs(message, "COOLDOWN", text));
+                const text = "⏱️ You are not ready for an explore.";
+                return message.channel.send(embedTemplates.Jobs(message, "COOLDOWN", text).addField("Remaining", `\`\`\`${time}\`\`\``));
             }
         } catch (error) {
             return Promise.reject(error);

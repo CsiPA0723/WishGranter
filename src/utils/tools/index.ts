@@ -1,6 +1,5 @@
 import { GuildMember, Message } from "discord.js";
-// import Database from "../../systems/database";
-// import AnalyticSys from "../../systems/analytic";
+import Database from "../../systems/database";
 import moment from "moment";
 
 export function Clean(text: any): string {
@@ -164,8 +163,7 @@ export async function ShutdownSequence(message: Message, text: string) {
     try {
         await message.client.logChannel.send(`\`${text}\``);
         await message.channel.send(`\`${text}\``);
-        // await Database.Connection.end().then(() => console.log("Database shutdown"));
-        // await AnalyticSys.Shut().then(() => console.log("Analytic Sys Shut"));
+        await Database.Connection.end().then(() => console.log("Database shutdown"));
     } catch (error) {
         console.error(error);
     }
