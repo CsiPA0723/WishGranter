@@ -1,6 +1,6 @@
 {
   "name": "wishgranter",
-  "version": "2.0",
+  "version": "2.0.0",
   "description": "A discord bot for a specified discord guild. S.T.A.L.K.E.R.",
   "main": "dist/client.js",
   "scripts": {
