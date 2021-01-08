@@ -37,12 +37,12 @@ class Send implements BaseCommand {
             return message.channel.send(embed);
         }
 
-        if(!args[1] || isNaN(parseInt(args[1]))) {
+        if(!args[0] || isNaN(parseInt(args[0]))) {
             const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "Missing amount.", this);
             return message.channel.send(embed);
         }
 
-        let amount = parseInt(args[1]);
+        let amount = parseInt(args[0]);
         if(amount < 0) {
             const embed = embedTemplates.Cmd.ArgErrCustom(message.client, "The amount can not be negative.", this);
             return message.channel.send(embed);
