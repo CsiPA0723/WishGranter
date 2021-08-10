@@ -21,7 +21,7 @@
     "typescript"
   ],
   "author": "Péter András 'CsiPA' Csizmadia",
-  "license": "ISC",
+  "license": "GPL-3.0-or-later",
   "homepage": "https://bitbucket.org/CsiPA0723/wishgranter#readme",
   "dependencies": {
     "canvas": "^2.6.1",
