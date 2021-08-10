@@ -10,5 +10,5 @@ A custom made discord bot.
 ## How to Build
 
 * Download the repository
-* Open a console inside the direcory
+* Open a console inside the directory
 * Run `npm install` then `npm run build` inside the console
